@@ -64,6 +64,19 @@ hermes -s reana-aip -s data-aip-de-s3
 
 Or ask Hermes directly in chat to use a named skill.
 
+## Security scanning
+
+This repository includes a GitHub Actions workflow at:
+
+- `.github/workflows/secret-scan.yml`
+
+It runs `gitleaks` on:
+- pushes to `main`
+- pull requests
+- manual workflow dispatch
+
+This helps catch accidentally committed API keys, tokens, passwords, and private keys in both the working tree and git history available to the runner.
+
 ## Authoring rules
 
 Every skill should contain:
