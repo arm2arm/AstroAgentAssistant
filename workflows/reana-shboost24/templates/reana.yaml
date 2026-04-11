@@ -1,0 +1,8 @@
+workflow:
+  type: serial
+  specification:
+    steps:
+      - name: shboost24-plot
+        environment: <approved-environment>
+        commands:
+          - python shboost24_plot.py

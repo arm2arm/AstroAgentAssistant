@@ -1,0 +1,8 @@
+workflow:
+  type: serial
+  specification:
+    steps:
+      - name: run-analysis
+        environment: <approved-environment>
+        commands:
+          - python analysis.py
