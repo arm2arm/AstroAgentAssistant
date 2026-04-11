@@ -27,6 +27,43 @@ hermes skills tap add arm2arm/AstroAgentAssistant-
 
 Then search and install skills from it.
 
+### Install examples
+
+Browse/search:
+
+```bash
+hermes skills browse
+hermes skills search shboost
+hermes skills search reana
+```
+
+Install specific skills:
+
+```bash
+hermes skills install arm2arm/AstroAgentAssistant-/astronomy/shboost24-cmd
+hermes skills install arm2arm/AstroAgentAssistant-/astronomy/gaia-aip-de-adql
+hermes skills install arm2arm/AstroAgentAssistant-/workflows/reana-aip
+hermes skills install arm2arm/AstroAgentAssistant-/infrastructure/openwebui-hermes
+```
+
+Suggested starter bundle for the current AIP-style setup:
+
+```bash
+hermes skills install arm2arm/AstroAgentAssistant-/astronomy/data-aip-de-s3
+hermes skills install arm2arm/AstroAgentAssistant-/astronomy/shboost24-cmd
+hermes skills install arm2arm/AstroAgentAssistant-/workflows/reana-aip
+hermes skills install arm2arm/AstroAgentAssistant-/infrastructure/hermes-api-server
+```
+
+### Load a skill in a session
+
+```bash
+hermes -s shboost24-cmd
+hermes -s reana-aip -s data-aip-de-s3
+```
+
+Or ask Hermes directly in chat to use a named skill.
+
 ## Authoring rules
 
 Every skill should contain:
@@ -56,3 +93,19 @@ This repo starts with scaffolds for:
 - Hermes ↔ Open WebUI integration
 - Hermes API server setup
 - 2026 agentic astronomy literature
+
+## AIP-specific operational defaults currently encoded in this repo
+
+- SHboost24 public S3 endpoint: `https://s3.data.aip.de:9000`
+- SHboost24 parquet glob: `s3://shboost2024/shboost_08july2024_pub.parq/*.parquet`
+- REANA environment source repo: `https://gitlab-p4n.aip.de/punch_public/reana/environments`
+- Common observed REANA environments:
+  - `gitlab-p4n.aip.de:5005/p4nreana/reana-env:py311-astro.9845`
+  - `gitlab-p4n.aip.de:5005/p4nreana/reana-env:py311-astro-ml.2891a60c`
+- REANA convention: default memory `32GB`
+- Plotting convention for SHboost24 CMDs:
+  - local Parquet cache
+  - PNG only
+  - original axes
+  - y-axis inverted only
+  - `hexbin` density with `512x512` grid
