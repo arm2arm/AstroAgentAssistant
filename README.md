@@ -40,19 +40,19 @@ hermes skills search reana
 Install specific skills:
 
 ```bash
-hermes skills install arm2arm/AstroAgentAssistant-/astronomy/shboost24-cmd
-hermes skills install arm2arm/AstroAgentAssistant-/astronomy/gaia-aip-de-adql
-hermes skills install arm2arm/AstroAgentAssistant-/workflows/reana-aip
-hermes skills install arm2arm/AstroAgentAssistant-/infrastructure/openwebui-hermes
+hermes skills install arm2arm/AstroAgentAssistant/astronomy/shboost24-cmd
+hermes skills install arm2arm/AstroAgentAssistant/astronomy/gaia-aip-de-adql
+hermes skills install arm2arm/AstroAgentAssistant/workflows/reana-aip
+hermes skills install arm2arm/AstroAgentAssistant/infrastructure/openwebui-hermes
 ```
 
 Suggested starter bundle for the current AIP-style setup:
 
 ```bash
-hermes skills install arm2arm/AstroAgentAssistant-/astronomy/data-aip-de-s3
-hermes skills install arm2arm/AstroAgentAssistant-/astronomy/shboost24-cmd
-hermes skills install arm2arm/AstroAgentAssistant-/workflows/reana-aip
-hermes skills install arm2arm/AstroAgentAssistant-/infrastructure/hermes-api-server
+hermes skills install arm2arm/AstroAgentAssistant/astronomy/data-aip-de-s3
+hermes skills install arm2arm/AstroAgentAssistant/astronomy/shboost24-cmd
+hermes skills install arm2arm/AstroAgentAssistant/workflows/reana-aip
+hermes skills install arm2arm/AstroAgentAssistant/infrastructure/hermes-api-server
 ```
 
 ### Load a skill in a session
