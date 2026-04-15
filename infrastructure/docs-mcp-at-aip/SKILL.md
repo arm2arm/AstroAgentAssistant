@@ -160,12 +160,53 @@ langfuse, mcp, pandas, reana, snakemake, unsloth
 | `cancel_job` | Cancel a running job | ❌ |
 | `remove_docs` | Remove indexed docs | ❌ |
 
+## Verified Connection Details
+
+Discovered through systematic testing (hostname probing, path enumeration, header negotiation):
+
+| Property | Value |
+|---|---|
+| **Hostname** | `docs-mcp-server.kube.aip.de` (NOT `mcp-docs.kube.aip.de` which 404s) |
+| **MCP endpoint** | `/mcp` (HTTP POST + SSE) |
+| **Protocol version** | `2024-11-05` |
+| **Required headers** | `Content-Type: application/json` + `Accept: application/json, text/event-stream` |
+| **Response format** | SSE — parse `data:` line as JSON (strip `data: ` prefix) |
+| **Server version** | 0.1.0 |
+| **DNS** | `141.33.165.5` (IPv4 only) |
+
+### Verified curl commands
+
+**Initialize:**
+```bash
+curl -sk -m 5 -X POST "https://docs-mcp-server.kube.aip.de/mcp" \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json, text/event-stream" \
+  -d '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2024-11-05","capabilities":{},"clientInfo":{"name":"hermes","version":"1.0"}}}'
+```
+
+**List libraries:**
+```bash
+curl -sk -m 10 -X POST "https://docs-mcp-server.kube.aip.de/mcp" \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json, text/event-stream" \
+  -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"list_libraries","arguments":{}}}'
+```
+
+**Search docs:**
+```bash
+curl -sk -m 10 -X POST "https://docs-mcp-server.kube.aip.de/mcp" \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json, text/event-stream" \
+  -d '{"jsonrpc":"2.0","id":3,"method":"tools/call","params":{"name":"search_docs","arguments":{"library":"reana","query":"workflow specification","limit":3}}}'
+```
+
 ## Pitfalls
 
 - **Internal network only** — server is not accessible from outside the AIP network.
-- **Self-signed certificate** — add `Insecure` flag or import the CA cert if the client rejects it.
-- **SSE response format** — the server returns messages as `event: message` followed by `data: <json>` lines. Parse the `data:` lines as JSON.
-- **Protocol version** — use `2024-11-05` for compatibility.
+- **Self-signed certificate** — use `-k` flag in curl or `Insecure=True` in Python.
+- **Wrong hostname** — `mcp-docs.kube.aip.de` returns 404 — always use `docs-mcp-server.kube.aip.de`.
+- **Wrong Accept header** — omitting `text/event-stream` causes `32000 Not Acceptable` error.
+- **SSE parsing** — responses are SSE format: `event: message\ndata: {...}\n\n`. Extract the JSON from the `data:` line.
 - **scrape_docs is destructive** — it re-indexes; use `refresh_version` for updates.
 
 ## Verification
