@@ -22,7 +22,7 @@ It is intended to hold:
 Add the repository as a tap:
 
 ```bash
-hermes skills tap add arm2arm/AstroAgentAssistant-
+hermes skills tap add arm2arm/AstroAgentAssistant
 ```
 
 Then search and install skills from it.
@@ -94,18 +94,36 @@ Optional support files:
 
 ## Initial starter skills
 
-This repo starts with scaffolds for:
-- SHboost24 CMD plotting
-- StarHorse access
-- gaia.aip.de ADQL usage
-- data.aip.de S3 access
-- REANA AIP workflows
-- REANA SHboost24 workflows
-- CMD plotting in Python
-- seaborn paper plots
-- Hermes ↔ Open WebUI integration
-- Hermes API server setup
-- 2026 agentic astronomy literature
+### Astronomy
+- **rave-dr6** — RAVE DR6 TAP query via pyvo (nearest stars, RA/Dec, galactic projections)
+- **gaia-aip-de-adql** — Gaia DR3 @AIP Daiquiri REST API (1.8B sources, async jobs)
+- **shboost24-cmd** — SHboost24 CMD plotting with local Parquet caching
+- **starhorse-access** — StarHorse distance estimation
+- **data-aip-de-s3** — AIP S3 bucket access and dataset listing
+
+### Workflows
+- **reana-aip** — REANA workflows with AIP conventions (approved envs, 32GB memory)
+- **reana-shboost24** — REANA workflows for SHboost24 CMD analysis
+- **reana-serial-python** — REANA serial Python analysis template
+
+### Python
+- **cmd-plotting** — Colour-magnitude diagram plotting conventions
+- **s3-parquet-sampling** — S3 Parquet sampling, local caching, and PNG plotting
+- **seaborn-paper-plots** — Publication-quality seaborn figures
+
+### Infrastructure
+- **openwebui-hermes** — Hermes ↔ Open WebUI integration
+- **hermes-api-server** — Hermes API server setup
+- **k8s-mcp-docs** — AIP Kubernetes MCP documentation server
+
+### Research
+- **arxiv-research** — arXiv paper search, retrieval, BibTeX, and Semantic Scholar citations
+- **mnras-latex-portable** — MNRAS LaTeX manuscript build and packaging
+- **2026-agentic-astronomy-literature** — Curated literature on AI agents in astronomy
+
+### Productivity & GitHub
+- **nextcloud-caldav** — AIP Nextcloud calendar management via CalDAV
+- **github-pr-workflow** — Full PR lifecycle (create, review, merge)
 
 ## AIP-specific operational defaults currently encoded in this repo
 
