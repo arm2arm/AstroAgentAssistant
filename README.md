@@ -114,7 +114,7 @@ Optional support files:
 ### Infrastructure
 - **openwebui-hermes** — Hermes ↔ Open WebUI integration
 - **hermes-api-server** — Hermes API server setup
-- **k8s-mcp-docs** — AIP Kubernetes MCP documentation server
+- **docs-mcp-at-aip** — AIP documentation MCP server (15+ indexed libraries: reana, pandas, snakemake, dask, unsloth, etc.)
 
 ### Research
 - **arxiv-research** — arXiv paper search, retrieval, BibTeX, and Semantic Scholar citations
