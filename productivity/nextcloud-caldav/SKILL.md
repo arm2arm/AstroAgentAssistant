@@ -31,19 +31,20 @@ export CALDAV_PASS="<your-password>"
 export CALDAV_BASE="https://cloud.aip.de/remote.php/dav/calendars/"
 ```
 
-## Calendar Paths
+## Known Calendar Paths
 
-### Personal Calendars (read-write)
-- `Persoenlich` — personal events
-- `Students`
-- `Gabi`
-- `ADMIN`
+Personal calendars (read-write) — URL-encode special characters:
+- `persoenlich` → `pers%c3%b6nlich` (contains ö)
+- `students` → `students`
+- `gabi` → `gabi`
+- `admin` → `admin`
 
-### Shared Calendars (read-only)
-- `Harry/henke`
-- `eScience/4MOST/PUNCH4NFDI/agalkin`
-- `mhd-out/delstner`
-- `HPC coffee talk/esacchi`
+Shared calendars (read-only):
+- `personal_shared_by_henke` (Harry/Enke)
+- `e-science_shared_by_agalkin`
+- `4most_shared_by_agalkin`
+- `escience-holidays_shared_by_agalkin`
+- `mhd-out_shared_by_delstner`
 
 ## Procedure
 
@@ -51,52 +52,48 @@ export CALDAV_BASE="https://cloud.aip.de/remote.php/dav/calendars/"
 ```bash
 curl -s -u "${CALDAV_USER}:${CALDAV_PASS}" \
   -X PROPFIND \
+  -H "Accept: application/xml" \
   -H "Depth: 1" \
   "${CALDAV_BASE}"
 ```
 
 ### 2. List events in a calendar
 ```bash
-CALENDAR="persoenlich"
+# Calendar path must be URL-encoded — e.g. Persoenlich → pers%c3%b6nlich
 curl -s -u "${CALDAV_USER}:${CALDAV_PASS}" \
-  -X REPORT \
+  -X PROPFIND \
+  -H "Accept: application/xml" \
   -H "Depth: 1" \
-  -H "Content-Type: application/xml; charset=utf-8" \
-  -d '<?xml version="1.0" encoding="utf-8" ?>
-<d:prop-sync xmlns:d="DAV:" xmlns:cs="http://calendarserver.org/ns/">
-  <d:prop>
-    <d:displayname/>
-    <cs:getctag/>
-    <d:resourcetype/>
-  </d:prop>
-</d:prop-sync>' \
-  "${CALDAV_BASE}${CALDAV_USER}/${CALENDAR}/"
+  "${CALDAV_BASE}${CALDAV_USER}/pers%c3%b6nlich/"
 ```
 
 ### 3. Create an event
 ```bash
-CALENDAR="persoenlich"
 curl -s -u "${CALDAV_USER}:${CALDAV_PASS}" \
   -X PUT \
+  -H "Accept: application/xml" \
   -H "Content-Type: text/plain; charset=utf-8" \
   -d "BEGIN:VCALENDAR
 VERSION:2.0
+PRODID:-//Hermes Agent//EN
 BEGIN:VEVENT
+UID:unique-event-id-$(date +%Y%m%d)
+DTSTART;VALUE=DATE-TIME:20260416T113000Z
+DTEND;VALUE=DATE-TIME:20260416T123000Z
 SUMMARY:Team Meeting
-DTSTART:20260415T100000Z
-DTEND:20260415T110000Z
 DESCRIPTION:Weekly sync
+LOCATION:Zoom
 END:VEVENT
 END:VCALENDAR" \
-  "${CALDAV_BASE}${CALDAV_USER}/${CALENDAR}/meeting-uid.ics"
+  "${CALDAV_BASE}${CALDAV_USER}/pers%c3%b6nlich/unique-event-id.ics"
 ```
 
 ### 4. Delete an event
 ```bash
-CALENDAR="persoenlich"
 curl -s -u "${CALDAV_USER}:${CALDAV_PASS}" \
   -X DELETE \
-  "${CALDAV_BASE}${CALDAV_USER}/${CALENDAR}/meeting-uid.ics"
+  -H "Accept: application/xml" \
+  "${CALDAV_BASE}${CALDAV_USER}/pers%c3%b6nlich/event-uid-to-delete.ics"
 ```
 
 ## Nextcloud Version Note
@@ -104,11 +101,14 @@ curl -s -u "${CALDAV_USER}:${CALDAV_PASS}" \
 - The path format `${CALDAV_BASE}${CALDAV_USER}/${CALENDAR}/` is stable.
 
 ## Pitfalls
-- **Never hardcode credentials** in the SKILL.md — use `CALDAV_USER` and `CALDAV_PASS` environment variables.
-- Shared calendars (Harry, eScience, HPC coffee talk, mhd-out) are **read-only** — PUT/DELETE will fail with 403.
-- Credentials must be passed via `-u "${CALDAV_USER}:${CALDAV_PASS}"` — do not use Bearer token auth on this endpoint.
-- Calendar names with spaces or special characters must be URL-encoded.
-- Always use `${CALDAV_BASE}${CALDAV_USER}/${CALENDAR}/` — the calendar path always includes the authenticated user.
+- **Never hardcode credentials** — use `CALDAV_USER` and `CALDAV_PASS` environment variables.
+- **Every curl call needs `-H "Accept: application/xml"`** — without it, PROPFIND returns HTML instead of XML (and the server may return 500).
+- **Calendar paths must be URL-encoded in the URL** — `Persoenlich` must be `pers%c3%b6nlich`, `Students` → `students`, etc. Using the raw name in the URL causes 500 errors.
+- **REPORT requests return 500 on this server** — use `PROPFIND -H "Depth: 1"` instead to list events.
+- **Shared calendars** (Harry, eScience, 4MOST, HPC coffee talk, mhd-out) are **read-only** — PUT/DELETE will fail with 403.
+- **No CSRF token needed** for Basic auth — the `-u` flag alone works. CSRF is only needed for session-based auth, not HTTP Basic.
+- **DTSTART/DTEND must be in UTC** — always use UTC times (`YYYYMMDDTHHMMSSZ`) in VEVENT, or include `VALUE=DATE-TIME;TZID=Europe/Berlin:` with a VTIMEZONE block.
+- **UID must be unique** — use a timestamp or UUID. Re-using the same UID overwrites the previous event.
 
 ## Verification
 - PROPFIND returns calendar list with non-empty response.
