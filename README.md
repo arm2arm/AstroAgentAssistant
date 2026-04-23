@@ -38,7 +38,7 @@ This repository is organized as a shareable skills collection. It holds:
 | `reana-client-multi-backend/` | REANA multi-profile config | 1 |
 | `reana-workflows/` | REANA workflow templates and best practices | 5 |
 | `red-teaming/` | LLM red-teaming and safety evaluation | 1 |
-| `research/` | arXiv, blog monitoring, LaTeX, literature review, polymarket | 9 |
+| `research/` | arXiv, blog monitoring, LaTeX, literature review, polymarket, DRP white papers | 10 |
 | `sin-unit-circle-animation/` | Unit circle to sine wave animation | 1 |
 | `smart-home/` | Philips Hue smart home control | 1 |
 | `social-media/` | X/Twitter CLI client | 1 |
@@ -96,6 +96,9 @@ hermes skills install arm2arm/AstroAgentAssistant/software-development/systemati
 
 # Infrastructure
 hermes skills install arm2arm/AstroAgentAssistant/infrastructure/docs-mcp-at-aip
+
+# Research
+hermes skills install arm2arm/AstroAgentAssistant/research/drp-paper
 ```
 
 ### Load a skill in a session
@@ -157,7 +160,7 @@ Optional support files:
 
 **Productivity (10)** — CalDAV, Linear, Notion, Google Workspace, OCR, PDFs, presentations, image descriptions
 
-**Research (9)** — arXiv, blog monitoring, LaTeX/MNRAS, literature review, polymarket, LLM wiki
+**Research (10)** — arXiv, blog monitoring, LaTeX/MNRAS, literature review, polymarket, LLM wiki, DRP white papers
 
 **Software Development (11)** — MCP docs-first, TDD, subagent-driven dev, debugging, code review, planning
 
