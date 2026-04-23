@@ -31,6 +31,11 @@ This is especially important for:
 - Extract likely libraries from the user's request, existing code, imports, stack traces, or repository files.
 - If Dask is involved, treat it as high priority and consult MCP docs before writing any code.
 
+### 1a. Auto-load specialized companion skills when relevant
+- If the task is primarily about **Dask**, also load `dask-mcp-docs-first` and follow its stricter query templates.
+- If the task is primarily about **pandas + Datashader** plotting or dataframe-to-visualization pipelines, also load `pandas-datashader-mcp-docs-first`.
+- Treat this skill as the general umbrella skill and delegate to the more specialized companion skill whenever one clearly matches the task.
+
 ### 2. Query the docs MCP server first
 Prefer native MCP tools when available:
 - `mcp_docs_list_libraries`
