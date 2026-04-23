@@ -8,7 +8,7 @@ metadata:
   hermes:
     tags: [python, mcp, docs, dask, pandas, datashader, coding]
     category: python
-    related_skills: [docs-mcp-at-aip, reana-serial-python, s3-parquet-sampling]
+    related_skills: [docs-mcp-at-aip, dask-mcp-docs-first, pandas-datashader-mcp-docs-first, reana-serial-python, s3-parquet-sampling]
 ---
 
 # Python MCP Docs First

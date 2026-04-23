@@ -113,6 +113,7 @@ Optional support files:
 - **seaborn-paper-plots** — Publication-quality seaborn figures
 - **python-mcp-docs-first** — Consult the docs MCP server first when writing Python, especially for Dask and other indexed libraries
 - **dask-mcp-docs-first** — Use strict MCP-grounded query templates before generating or reviewing Dask code
+- **pandas-datashader-mcp-docs-first** — Use MCP-grounded pandas and Datashader query templates before building plotting pipelines
 
 ### Infrastructure
 - **openwebui-hermes** — Hermes ↔ Open WebUI integration
