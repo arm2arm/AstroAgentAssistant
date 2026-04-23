@@ -112,11 +112,14 @@ Optional support files:
 - **s3-parquet-sampling** — S3 Parquet sampling, local caching, and PNG plotting
 - **seaborn-paper-plots** — Publication-quality seaborn figures
 - **python-mcp-docs-first** — Consult the docs MCP server first when writing Python, especially for Dask and other indexed libraries
+- **dask-mcp-docs-first** — Use strict MCP-grounded query templates before generating or reviewing Dask code
 
 ### Infrastructure
 - **openwebui-hermes** — Hermes ↔ Open WebUI integration
 - **hermes-api-server** — Hermes API server setup
 - **docs-mcp-at-aip** — AIP documentation MCP server (15+ indexed libraries: reana, pandas, snakemake, dask, unsloth, etc.)
+- **hermes-native-mcp** — Configure Hermes built-in MCP client for HTTP/stdio servers, testing, and TLS trust fixes
+- **mcporter-cli** — Use mcporter for ad-hoc MCP discovery, schema inspection, and debugging
 
 ### Science / Digital Twin
 - **dtwin-setup** — Apptainer-based dt4acc digital twin setup for BESSY II-style workflows

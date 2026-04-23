@@ -8,7 +8,7 @@ metadata:
   hermes:
     tags: [infrastructure, mcp, documentation, search, aip, internal, reana, pandas, snakemake]
     category: infrastructure
-    related_skills: [hermes-api-server, openwebui-hermes, reana-serial-python]
+    related_skills: [hermes-native-mcp, mcporter-cli, hermes-api-server, openwebui-hermes, reana-serial-python]
 ---
 
 # AIP Documentation MCP Server
