@@ -111,6 +111,7 @@ Optional support files:
 - **cmd-plotting** — Colour-magnitude diagram plotting conventions
 - **s3-parquet-sampling** — S3 Parquet sampling, local caching, and PNG plotting
 - **seaborn-paper-plots** — Publication-quality seaborn figures
+- **python-mcp-docs-first** — Consult the docs MCP server first when writing Python, especially for Dask and other indexed libraries
 
 ### Infrastructure
 - **openwebui-hermes** — Hermes ↔ Open WebUI integration

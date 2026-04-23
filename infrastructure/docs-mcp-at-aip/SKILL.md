@@ -1,6 +1,6 @@
 ---
 name: docs-mcp-at-aip
-description: Access the AIP documentation MCP server at https://docs-mcp-server.kube.aip.de. Search, scrape, and fetch documentation for 15+ indexed libraries including reana, pandas, snakemake, dask, unsloth, and more. HTTP POST + SSE, self-signed cert, internal network only.
+description: Access the AIP documentation MCP server at https://docs-mcp-server.kube.aip.de. Search, scrape, and fetch documentation for 15+ indexed libraries including reana, pandas, snakemake, dask, unsloth, and more. HTTP POST + SSE, internal network only.
 version: 1.0.0
 author: AstroAgent / AIP
 license: MIT
@@ -30,13 +30,53 @@ The MCP endpoint is `/mcp` on `https://docs-mcp-server.kube.aip.de`.
 
 Configure in `~/.hermes/config.yaml`:
 ```yaml
-mcp:
-  servers:
-    - name: docs-mcp-aip
-      url: https://docs-mcp-server.kube.aip.de/mcp
+mcp_servers:
+  docs:
+    url: https://docs-mcp-server.kube.aip.de/mcp
 ```
 
 Or use the Hermes native MCP client. The server uses HTTP POST + Server-Sent Events — no extra headers needed beyond the standard MCP JSON-RPC protocol.
+
+### 1a. TLS trust fix for hosts missing the intermediate chain
+
+The endpoint may fail TLS verification on some hosts because the server does not always provide the full intermediate chain. A reliable local fix is to build a CA bundle that includes the GEANT intermediate and point Hermes, Python, curl, and Node at it:
+
+```bash
+mkdir -p ~/.hermes/certs
+curl -fsSL http://crt.harica.gr/HARICA-GEANT-TLS-R1.cer -o ~/.hermes/certs/HARICA-GEANT-TLS-R1.cer
+
+python3 - <<'PY'
+from cryptography import x509
+from cryptography.hazmat.primitives import serialization
+from pathlib import Path
+
+src = Path.home()/'.hermes/certs/HARICA-GEANT-TLS-R1.cer'
+out = Path.home()/'.hermes/certs/HARICA-GEANT-TLS-R1.pem'
+cert = x509.load_der_x509_certificate(src.read_bytes())
+out.write_bytes(cert.public_bytes(serialization.Encoding.PEM))
+print(out)
+PY
+
+python3 - <<'PY'
+import certifi
+from pathlib import Path
+
+bundle = Path.home()/'.hermes/certs/custom-ca-bundle.pem'
+bundle.write_text(Path(certifi.where()).read_text() + '\n' + (Path.home()/'.hermes/certs/HARICA-GEANT-TLS-R1.pem').read_text())
+print(bundle)
+PY
+```
+
+Then add to `~/.hermes/.env`:
+
+```bash
+SSL_CERT_FILE=/home/$USER/.hermes/certs/custom-ca-bundle.pem
+REQUESTS_CA_BUNDLE=/home/$USER/.hermes/certs/custom-ca-bundle.pem
+NODE_EXTRA_CA_CERTS=/home/$USER/.hermes/certs/custom-ca-bundle.pem
+CURL_CA_BUNDLE=/home/$USER/.hermes/certs/custom-ca-bundle.pem
+```
+
+This preserves TLS verification instead of disabling it.
 
 ### 2. Initialize the connection
 
@@ -203,7 +243,7 @@ curl -sk -m 10 -X POST "https://docs-mcp-server.kube.aip.de/mcp" \
 ## Pitfalls
 
 - **Internal network only** — server is not accessible from outside the AIP network.
-- **Self-signed certificate** — use `-k` flag in curl or `Insecure=True` in Python.
+- **Incomplete certificate chain on some hosts** — the endpoint may fail TLS verification until the GEANT intermediate is trusted locally. Prefer a custom CA bundle over disabling verification.
 - **Wrong hostname** — `mcp-docs.kube.aip.de` returns 404 — always use `docs-mcp-server.kube.aip.de`.
 - **Wrong Accept header** — omitting `text/event-stream` causes `32000 Not Acceptable` error.
 - **SSE parsing** — responses are SSE format: `event: message\ndata: {...}\n\n`. Extract the JSON from the `data:` line.
