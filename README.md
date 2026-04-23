@@ -13,6 +13,7 @@ It is intended to hold:
 - `astronomy/` — survey, archive, ADQL, S3, and dataset-specific skills
 - `workflows/` — REANA and workflow-engine skills
 - `python/` — plotting and analysis-code skills
+- `science/` — digital-twin and accelerator-science skills
 - `infrastructure/` — Open WebUI, Hermes API server, deployment skills
 - `research/` — literature-grounding and curated knowledge synthesis skills
 - `agents/` — agent concepts and multi-agent orchestration skills
@@ -115,6 +116,13 @@ Optional support files:
 - **openwebui-hermes** — Hermes ↔ Open WebUI integration
 - **hermes-api-server** — Hermes API server setup
 - **docs-mcp-at-aip** — AIP documentation MCP server (15+ indexed libraries: reana, pandas, snakemake, dask, unsloth, etc.)
+
+### Science / Digital Twin
+- **dtwin-setup** — Apptainer-based dt4acc digital twin setup for BESSY II-style workflows
+- **dtwin-host-smoke-test** — Reproducible host-side smoke test for the public dt4acc stack
+- **dtwin-epics-runbook** — EPICS-first runbook for the fastest current dt4acc startup path
+- **dtwin-tango-runbook** — SOLEIL-oriented TANGO runbook with private-data prerequisites
+- **dt4acc-container-troubleshooting** — Troubleshooting guide for dt4acc container and TANGO startup issues
 
 ### Research
 - **arxiv-research** — arXiv paper search, retrieval, BibTeX, and Semantic Scholar citations
