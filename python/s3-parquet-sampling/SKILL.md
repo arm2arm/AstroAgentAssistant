@@ -1,90 +1,86 @@
 ---
 name: s3-parquet-sampling
-description: Efficiently sample a subset of a massive Parquet dataset stored on an S3-compatible bucket, cache the sampled rows locally as a Parquet file for fast reuse, and produce high-resolution PNG plots suitable for analysis and publication.
-version: 1.0.0
+description: Sample or reduce massive Parquet datasets on S3 using local Parquet caching, Dask-first processing for large inputs, and hvPlot/Datashader for scalable scientific visualization.
+version: 1.1.0
 author: AstroAgent / AIP
 license: MIT
 metadata:
   hermes:
-    tags: [python, parquet, s3, sampling, plotting, matplotlib, data-science]
+    tags: [python, parquet, s3, sampling, plotting, dask, hvplot, datashader, data-science]
     category: python
-    related_skills: [cmd-plotting, reana-serial-python, shboost24-cmd]
+    related_skills: [data-aip-de-s3, reana-serial-python, shboost24-cmd, dask-hvplot-datashader-scientific-plots]
 ---
 
 # S3 Parquet Sampling and Plotting
 
 ## When to Use
-Use this skill when working with a large Parquet dataset (billions of rows) on S3 where loading the full dataset is impractical. Sample a subset, cache it locally as Parquet for fast reuse, and generate high-resolution PNG plots.
+Use this skill when working with a large Parquet dataset on S3 where loading the full dataset eagerly is impractical. Sample or reduce it, cache the working result locally as Parquet, and generate scalable plots.
 
 ## Procedure
 
-### 1. Sample from S3
+### 1. Start with Dask for large datasets
 ```python
-import pyarrow.parquet as pq
-import pyarrow.compute as pc
+import dask.dataframe as dd
 
-# Open dataset without loading all data
-dataset = pq.ParquetDataset('s3://bucket/path/to/data/')
-
-# Sample N rows (e.g., 100_000)
-sample_size = 100_000
-total_estimate = sum(r.num_rows for r in dataset.files)
-sample_fraction = sample_size / max(total_estimate, 1)
-
-# Filter to ~sample_fraction of files
-import random
-sampled_files = random.sample(dataset.files, max(1, int(len(dataset.files) * sample_fraction)))
-
-table = pq.concat_tables(pq.ParquetDataset(f).read() for f in sampled_files)
-df = table.to_pandas()
+columns = ['x', 'y']
+ddf = dd.read_parquet('s3://bucket/path/to/data/', columns=columns)
 ```
 
-### 2. Cache locally as Parquet
+If the dataset is huge, Dask is the default choice. Aim to keep the effective working footprint around **32GB RAM** by pruning columns, filtering early, and avoiding eager `.compute()` until necessary.
+
+### 2. Reduce before caching
+Examples:
 ```python
-import pandas as pd
-df.to_parquet('/tmp/sample_cache.parquet', index=False)
-print(f"Cached {len(df)} rows, {df.memory_usage(deep=True).sum() / 1e6:.1f} MB")
+# Example filter / reduction before materializing locally
+reduced = ddf.dropna(subset=['x', 'y'])
+reduced = reduced.sample(frac=0.01)
 ```
 
-### 3. Load from cache (fast reuse)
+### 3. Cache locally as Parquet
+```python
+cache_path = '/tmp/sample_cache.parquet'
+reduced.to_parquet(cache_path, write_index=False)
+```
+
+If you need a pandas DataFrame afterward, load it from the local cache rather than the original S3 path.
+
+### 4. Reload from cache
 ```python
 import pandas as pd
-df = pd.read_parquet('/tmp/sample_cache.parquet')
+
+df = pd.read_parquet(cache_path)
 ```
 
-### 4. Plot (hexbin density)
+### 5. Plot with hvPlot first
+For medium-sized cached data:
 ```python
-import matplotlib; matplotlib.use('Agg')
-import matplotlib.pyplot as plt, seaborn as sns
-
-sns.set_style('whitegrid')
-fig, ax = plt.subplots(figsize=(10, 6))
-
-hb = ax.hexbin(df['x'], df['y'], gridsize=50, cmap='plasma', mincnt=1)
-ax.set_xlabel('x')
-ax.set_ylabel('y')
-fig.colorbar(hb, ax=ax).set_label('Count')
-fig.tight_layout()
-fig.savefig('/tmp/plot.png', dpi=300)
+import hvplot.pandas  # noqa
+plot = df.hvplot.scatter(x='x', y='y', alpha=0.3, responsive=True)
 ```
 
-## S3 Access Patterns
+### 6. For large data, prefer Dask + hvPlot + Datashader
+```python
+import hvplot.dask  # noqa
+plot = reduced.hvplot.scatter(
+    x='x', y='y', rasterize=True, cnorm='eq_hist', responsive=True
+)
+```
 
-| Pattern | Code |
-|---|---|
-| With credentials | `pq.ParquetDataset('s3://bucket/path/', filesystem=pyarrow.fs.S3FileSystem(access_key='...', secret_key='...'))` |
-| Public bucket | `pq.ParquetDataset('s3://bucket/path/')` |
-| Via s5cmd | `!s5cmd cp s3://bucket/path/file.parquet /tmp/` |
+Use `rasterize=True` or `datashade=True` for dense large datasets where plotting raw points becomes slow or unreadable.
+
+## S3 access notes
+- Read only required columns.
+- Prefer filters that reduce row groups early when available.
+- Use a local Parquet cache for all repeated downstream work.
 
 ## Pitfalls
-- Do NOT load the full Parquet dataset into memory — always sample first.
-- Do NOT save more columns than needed — use `df[['col_a', 'col_b']]` to drop unused columns before saving.
-- Do NOT use PDF by default — PNG only unless explicitly requested.
-- Parquet memory footprint: `df.memory_usage(deep=True).sum()` — ensure it fits in available RAM.
-- When sampling across multiple Parquet files, random.sample distributes across files, not rows within files.
+- Do NOT load the full remote dataset eagerly with pandas when the dataset is large.
+- Do NOT keep recomputing from S3 if the reduced sample can be cached locally.
+- Do NOT save unnecessary columns in the local cache.
+- Do NOT default to static matplotlib-only plotting when hvPlot or Datashader would better represent dense data.
 
 ## Verification
-- Cached Parquet file exists and has non-zero size.
-- Plot is PNG format.
-- Data shape matches the sampled subset (not all data).
-- Figure is readable with appropriate axis labels and colorbar.
+- Local Parquet cache exists and has non-zero size.
+- Large-input processing used Dask rather than eager full reads.
+- Plotting path is explicit and scalable (`hvplot`, `rasterize=True`, or `datashade=True` as appropriate).
+- The final dataset size reflects a reduced/sample subset rather than the full original dataset.

@@ -8,7 +8,7 @@ metadata:
   hermes:
     tags: [python, pandas, datashader, mcp, docs, plotting, visualization]
     category: python
-    related_skills: [python-mcp-docs-first, dask-mcp-docs-first, docs-mcp-at-aip, s3-parquet-sampling]
+    related_skills: [python-mcp-docs-first, dask-mcp-docs-first, dask-hvplot-datashader-scientific-plots, docs-mcp-at-aip, s3-parquet-sampling]
 ---
 
 # Pandas + Datashader MCP Docs First
@@ -37,6 +37,8 @@ If unversioned docs are available, treat them as the current reference unless th
 ### 2. Run focused documentation queries before coding
 Do not use a single broad query. Use multiple narrow API-level queries.
 
+If the data originates from **S3 or TAP**, prefer a local Parquet cache for repeated downstream analysis. For large tabular data, prefer a Dask DataFrame plus `hvplot`/Datashader rather than eager pandas plotting.
+
 #### Pandas queries
 - `read_parquet dtype_backend`
 - `read_parquet filesystem storage_options`
@@ -60,6 +62,8 @@ Do not use a single broad query. Use multiple narrow API-level queries.
 - `datashader dask dataframe example`
 - `parquet to datashader pipeline`
 - `canvas plot width plot height`
+- `hvplot rasterize datashade`
+- `hvplot scientific plotting large data`
 
 ### 3. Fetch central pages when version-sensitive
 If a result appears central, fetch it for closer reading:
@@ -80,6 +84,9 @@ When returning code:
 - include imports explicitly
 - avoid deprecated or guessed pandas/Datashader APIs
 - keep the plotting pipeline clear and minimal
+- prefer `hvplot` as the default scientific plotting layer when interactive/scalable plotting is useful
+- use Dask + hvPlot + Datashader for large dense datasets
+- cache reduced S3/TAP-derived tabular results locally as Parquet
 - mention the consulted docs basis briefly if version-sensitive
 
 Example note:

@@ -117,6 +117,8 @@ Optional support files:
 - **python-mcp-docs-first** — Consult the docs MCP server first when writing Python, especially for Dask and other indexed libraries
 - **dask-mcp-docs-first** — Use strict MCP-grounded query templates before generating or reviewing Dask code
 - **pandas-datashader-mcp-docs-first** — Use MCP-grounded pandas and Datashader query templates before building plotting pipelines
+- **hdf5-on-s3-cached** — Cache S3-hosted HDF5 locally first and convert reusable tabular subsets to Parquet
+- **dask-hvplot-datashader-scientific-plots** — Build scalable scientific plots with Dask, hvPlot, and Datashader
 
 ### Infrastructure
 - **openwebui-hermes** — Hermes ↔ Open WebUI integration

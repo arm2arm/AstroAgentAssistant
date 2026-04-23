@@ -8,7 +8,7 @@ metadata:
   hermes:
     tags: [python, mcp, docs, dask, pandas, datashader, coding]
     category: python
-    related_skills: [docs-mcp-at-aip, dask-mcp-docs-first, pandas-datashader-mcp-docs-first, reana-serial-python, s3-parquet-sampling]
+    related_skills: [docs-mcp-at-aip, dask-mcp-docs-first, pandas-datashader-mcp-docs-first, reana-serial-python, s3-parquet-sampling, hdf5-on-s3-cached, dask-hvplot-datashader-scientific-plots]
 ---
 
 # Python MCP Docs First
@@ -34,6 +34,8 @@ This is especially important for:
 ### 1a. Auto-load specialized companion skills when relevant
 - If the task is primarily about **Dask**, also load `dask-mcp-docs-first` and follow its stricter query templates.
 - If the task is primarily about **pandas + Datashader** plotting or dataframe-to-visualization pipelines, also load `pandas-datashader-mcp-docs-first`.
+- If the task involves **HDF5 files on S3**, also load `hdf5-on-s3-cached`.
+- If the task is primarily about **large scientific plotting**, also load `dask-hvplot-datashader-scientific-plots`.
 - Treat this skill as the general umbrella skill and delegate to the more specialized companion skill whenever one clearly matches the task.
 
 ### 2. Query the docs MCP server first

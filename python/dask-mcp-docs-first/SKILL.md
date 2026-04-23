@@ -8,7 +8,7 @@ metadata:
   hermes:
     tags: [python, dask, mcp, docs, parallel-computing, code-generation]
     category: python
-    related_skills: [python-mcp-docs-first, docs-mcp-at-aip, s3-parquet-sampling]
+    related_skills: [python-mcp-docs-first, docs-mcp-at-aip, s3-parquet-sampling, dask-hvplot-datashader-scientific-plots]
 ---
 
 # Dask MCP Docs First
@@ -36,6 +36,8 @@ Record the best match. If unversioned docs are also available, treat them as the
 
 ### 2. Run focused documentation queries before coding
 Do not rely on one broad search. Use several targeted queries matching the requested operation.
+
+If the source data comes from **S3 or TAP**, assume a local Parquet cache should be created after reduction. If the dataset is huge, keep Dask as the default processing layer and aim for an effective working footprint around **32GB RAM**.
 
 #### Core ingestion / dataframe queries
 - `read_parquet partitions`
@@ -70,6 +72,11 @@ Do not rely on one broad search. Use several targeted queries matching the reque
 - `points canvas dask`
 - `shade export image`
 
+#### Dask + hvPlot queries
+- `hvplot rasterize dask dataframe`
+- `hvplot datashade dask dataframe`
+- `hvplot large data scientific plots`
+
 ### 3. Pull deeper page content if results are important
 For any result that appears central to the answer, fetch the page and read it more closely:
 ```text
@@ -90,6 +97,8 @@ When returning code:
 - keep the graph simple unless the task truly needs more complexity
 - prefer clear partition-aware code
 - avoid eager conversion to pandas too early
+- cache reduced S3/TAP-derived tabular results locally as Parquet
+- prefer `hvplot` for scientific plotting and combine it with `rasterize=True` / `datashade=True` when density or scale demands it
 - mention the consulted Dask docs version briefly when relevant
 
 Example note:

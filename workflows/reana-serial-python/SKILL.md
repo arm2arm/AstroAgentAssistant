@@ -8,7 +8,7 @@ metadata:
   hermes:
     tags: [reana, workflow, serial, python, parquet, analysis, reproducibility]
     category: workflows
-    related_skills: [reana-client-config, reana-aip, reana-shboost24, s3-parquet-sampling, cmd-plotting]
+    related_skills: [reana-client-config, reana-aip, reana-shboost24, s3-parquet-sampling, dask-hvplot-datashader-scientific-plots, cmd-plotting]
 ---
 
 # REANA Serial Python Analysis Template
@@ -25,6 +25,12 @@ mkdir -p workflows/my-analysis && cd workflows/my-analysis
 
 ### 1a. Configure REANA authentication
 Before submitting, make sure the REANA client is configured via `reana-client-config` and select the intended profile.
+
+### 1b. Use Dask by default for huge S3/TAP inputs
+If the remote input is large, prefer Dask over eager pandas loading and keep the effective working footprint around **32GB RAM**.
+
+### 1c. Plan a local cache immediately
+For data coming from **S3 or TAP**, cache the working dataset locally as Parquet before repeated downstream plotting or iteration.
 
 ### 2. Write `reana.yaml`
 ```yaml
@@ -84,6 +90,8 @@ reana-client download -w my-analysis
 - Set memory to 32GB unless explicitly overridden.
 - Include all Python scripts as workflow inputs (do not inline scripts in `reana.yaml`).
 - Prefer `reana-client run -w <name>` over `reana-client upload + start`.
+- For huge S3/TAP-derived tabular inputs, prefer Dask and materialize a local Parquet cache inside the workflow.
+- Prefer `hvplot` for scientific plotting; for dense large-data plots use Dask + hvPlot + Datashader.
 
 ## Common Remote Data Patterns
 
