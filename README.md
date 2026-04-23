@@ -96,7 +96,9 @@ Optional support files:
 ## Initial starter skills
 
 ### Astronomy
-- **rave-dr6** — RAVE DR6 TAP query via pyvo (nearest stars, RA/Dec, galactic projections)
+- **rave-dr6** — Canonical RAVE DR6 TAP query and table/column discovery skill
+- **rave-dr6-nearest-100-plot** — Nearest-100 RAVE DR6 PNG plotting workflow
+- **rave-dr6-public-talk-visualizations** — Presentation-ready RAVE DR6 visual outputs for talks
 - **gaia-aip-de-adql** — Gaia DR3 @AIP Daiquiri REST API (1.8B sources, async jobs)
 - **shboost24-cmd** — SHboost24 CMD plotting with local Parquet caching
 - **starhorse-access** — StarHorse distance estimation
@@ -104,6 +106,7 @@ Optional support files:
 
 ### Workflows
 - **reana-aip** — REANA workflows with AIP conventions (approved envs, 32GB memory)
+- **reana-client-config** — REANA client multi-profile config and secret handling via `config.yaml`
 - **reana-shboost24** — REANA workflows for SHboost24 CMD analysis
 - **reana-serial-python** — REANA serial Python analysis template
 
@@ -137,6 +140,7 @@ Optional support files:
 ### Productivity & GitHub
 - **nextcloud-caldav** — AIP Nextcloud calendar management via CalDAV
 - **github-pr-workflow** — Full PR lifecycle (create, review, merge)
+- **skills-repo-maintenance** — Audit, sync, and maintain the public skills repository itself
 
 ## AIP-specific operational defaults currently encoded in this repo
 

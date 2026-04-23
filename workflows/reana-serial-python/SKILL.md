@@ -8,7 +8,7 @@ metadata:
   hermes:
     tags: [reana, workflow, serial, python, parquet, analysis, reproducibility]
     category: workflows
-    related_skills: [reana-aip, reana-shboost24, s3-parquet-sampling, cmd-plotting]
+    related_skills: [reana-client-config, reana-aip, reana-shboost24, s3-parquet-sampling, cmd-plotting]
 ---
 
 # REANA Serial Python Analysis Template
@@ -22,6 +22,9 @@ Use this skill when creating a REANA workflow that: (1) reads remote data (S3, H
 ```bash
 mkdir -p workflows/my-analysis && cd workflows/my-analysis
 ```
+
+### 1a. Configure REANA authentication
+Before submitting, make sure the REANA client is configured via `reana-client-config` and select the intended profile.
 
 ### 2. Write `reana.yaml`
 ```yaml

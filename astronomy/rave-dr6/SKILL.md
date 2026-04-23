@@ -8,13 +8,21 @@ metadata:
   hermes:
     tags: [astronomy, rave-dr6, tap, stellar-parameters, galactic-coordinates, pyvo]
     category: astronomy
-    related_skills: [gaia-dr3, gaiadr3-aip-de-adql, shboost24-cmd, starhorse-access]
+    related_skills: [rave-dr6-nearest-100-plot, rave-dr6-public-talk-visualizations, gaiadr3-aip-de-adql, shboost24-cmd, starhorse-access]
 ---
 
 # RAVE DR6 TAP Query
 
 ## When to Use
-Use this skill when querying the RAVE (RAdial Velocity Experiment) 6th Data Release for stellar parameters, distances (parallax), or Galactic coordinates. Ideal for: finding the nearest 100 stars, plotting RA/Dec sky distributions, galactic plane projections, or cross-matching with Gaia.
+Use this skill when querying the RAVE (RAdial Velocity Experiment) 6th Data Release for stellar parameters, distances (parallax), or Galactic coordinates. Ideal for: generic TAP exploration, finding the nearest 100 stars, plotting RA/Dec sky distributions, galactic plane projections, or cross-matching with Gaia.
+
+## Skill taxonomy
+Use the public RAVE skills with this split:
+- `rave-dr6` — canonical query + table/column discovery skill
+- `rave-dr6-nearest-100-plot` — focused workflow for the nearest-100 PNG plots
+- `rave-dr6-public-talk-visualizations` — polished public-talk-ready visual outputs
+
+Start with `rave-dr6` for general querying and branch to the more specialized skill when the task is specifically plotting or presentation oriented.
 
 ## Procedure
 

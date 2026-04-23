@@ -8,7 +8,7 @@ metadata:
   hermes:
     tags: [reana, workflow, reproducibility, astronomy]
     category: workflows
-    related_skills: [reana-shboost24]
+    related_skills: [reana-client-config, reana-shboost24, reana-serial-python]
 ---
 
 # REANA AIP Workflow
@@ -17,11 +17,12 @@ metadata:
 Use this skill when preparing a REANA workflow under AIP conventions.
 
 ## Procedure
-1. Create a dedicated local workflow directory.
-2. Use an approved environment from the AIP REANA environments repository.
-3. Set memory to 32GB by default unless explicitly changed.
-4. Include all required scripts as workflow inputs.
-5. Prefer `reana-client run -w <name>` with the local folder context.
+1. Configure REANA authentication first with `reana-client-config` if the client is not already set up.
+2. Create a dedicated local workflow directory.
+3. Use an approved environment from the AIP REANA environments repository.
+4. Set memory to 32GB by default unless explicitly changed.
+5. Include all required scripts as workflow inputs.
+6. Prefer `reana-client run -w <name>` with the local folder context.
 
 ## Pitfalls
 - Do not invent custom environments.
