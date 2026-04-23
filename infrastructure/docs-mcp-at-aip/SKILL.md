@@ -8,7 +8,7 @@ metadata:
   hermes:
     tags: [infrastructure, mcp, documentation, search, aip, internal, reana, pandas, snakemake]
     category: infrastructure
-    related_skills: [hermes-native-mcp, mcporter-cli, hermes-api-server, openwebui-hermes, reana-serial-python]
+    related_skills: [hermes-native-mcp, mcporter-cli, python-mcp-docs-first, dask-mcp-docs-first, pandas-datashader-mcp-docs-first, hermes-api-server, openwebui-hermes, reana-serial-python]
 ---
 
 # AIP Documentation MCP Server
@@ -37,7 +37,13 @@ mcp_servers:
 
 Or use the Hermes native MCP client. The server uses HTTP POST + Server-Sent Events — no extra headers needed beyond the standard MCP JSON-RPC protocol.
 
-### 1a. TLS trust fix for hosts missing the intermediate chain
+### 1a. Auto-load specialized companion skills when the docs task turns into code generation
+- If the user is asking to **write general Python code** from these docs, also load `python-mcp-docs-first`.
+- If the task is primarily about **Dask**, also load `dask-mcp-docs-first`.
+- If the task is primarily about **pandas + Datashader** plotting or dataframe-to-visualization pipelines, also load `pandas-datashader-mcp-docs-first`.
+- Treat this skill as the documentation-access umbrella skill and hand off code-generation guidance to the more specialized companion skill whenever one clearly matches.
+
+### 1b. TLS trust fix for hosts missing the intermediate chain
 
 The endpoint may fail TLS verification on some hosts because the server does not always provide the full intermediate chain. A reliable local fix is to build a CA bundle that includes the GEANT intermediate and point Hermes, Python, curl, and Node at it:
 
