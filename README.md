@@ -1,22 +1,48 @@
 # AstroAgent Skills Repository
 
-Reusable Hermes skills for astronomy, astroinformatics, reproducible workflows, and the AstroAgent Assistant setup.
+Reusable Hermes Agent skills for astronomy, data science, reproducible workflows, AI/ML, devops, and productivity.
 
-This repository is organized as a shareable skills collection for Hermes Agent users.
-It is intended to hold:
+This repository is organized as a shareable skills collection. It holds:
 - procedural skills that encode repeatable workflows;
-- supporting references, templates, and scripts;
-- astronomy-specific operational knowledge that is useful during execution.
+- supporting references, templates, scripts, and assets;
+- domain-specific knowledge (astronomy, data science, MLOps, etc.).
 
 ## Repository layout
 
-- `astronomy/` — survey, archive, ADQL, S3, and dataset-specific skills
-- `workflows/` — REANA and workflow-engine skills
-- `python/` — plotting and analysis-code skills
-- `science/` — digital-twin and accelerator-science skills
-- `infrastructure/` — Open WebUI, Hermes API server, deployment skills
-- `research/` — literature-grounding and curated knowledge synthesis skills
-- `agents/` — agent concepts and multi-agent orchestration skills
+| Directory | Description | Skills |
+|---|---|---|
+| `astronomy/` | Survey, archive, and dataset-specific astronomy skills | 3 |
+| `autonomous-ai-agents/` | Multi-agent orchestration (Claude Code, Codex, OpenCode, Hermes) | 4 |
+| `creative/` | Animations, ASCII art, diagrams, music, web design, ideation | 13 |
+| `data-science/` | Scientific plotting, Dask, Datashader, REANA workflows, Parquet/S3 | 24 |
+| `devops/` | Docker, dt4acc digital twin, Manim rendering, REANA scripts, Paperclip | 14 |
+| `dogfood/` | Systematic web QA testing | 1 |
+| `dtwin-burnin-tests/` | Burn-in tests for dt4acc EPICS IOC | 1 |
+| `dtwin-host-smoke-test/` | Host-side smoke tests for dt4acc stack | 1 |
+| `dtwin-setup/` | Apptainer-based dt4acc digital twin build/run | 1 |
+| `email/` | Email management via CLI | 1 |
+| `fractal-showcase-animation/` | Fractal video with music | 1 |
+| `gaia-dr3-tap-query/` | Gaia DR3 nearest-100 stars via TAP | 1 |
+| `gaiadr3-aip-query-api/` | Gaia DR3 PostgreSQL access via AIP Daiquiri | 1 |
+| `gaming/` | Minecraft modpack servers, Pokemon emulation | 2 |
+| `github/` | GitHub workflows (PRs, issues, code review, repo mgmt, skill maintenance) | 8 |
+| `infrastructure/` | AIP documentation MCP server | 1 |
+| `leisure/` | Nearby places search | 1 |
+| `manim-020-gotchas/` | Manim CE 0.20.1 gotchas | 1 |
+| `mcp/` | MCP client (native, mcporter) | 2 |
+| `media/` | Audio, video, GIFs, YouTube, music generation | 6 |
+| `mlops/` | LLM fine-tuning, serving, inference, evaluation, HuggingFace | 22 |
+| `note-taking/` | Obsidian vault management | 1 |
+| `productivity/` | CalDAV, Linear, Notion, OCR, Google Workspace, PDFs, presentations | 10 |
+| `rave-dr6-recent-observations-plot/` | Recent RAVE DR6 observations RA-Dec plot | 1 |
+| `reana-client-multi-backend/` | REANA multi-profile config | 1 |
+| `reana-workflows/` | REANA workflow templates and best practices | 5 |
+| `red-teaming/` | LLM red-teaming and safety evaluation | 1 |
+| `research/` | arXiv, blog monitoring, LaTeX, literature review, polymarket | 9 |
+| `sin-unit-circle-animation/` | Unit circle to sine wave animation | 1 |
+| `smart-home/` | Philips Hue smart home control | 1 |
+| `social-media/` | X/Twitter CLI client | 1 |
+| `software-development/` | Coding workflows, MCP docs-first, TDD, debugging, code review | 11 |
 
 ## Using this repository with Hermes
 
@@ -28,42 +54,58 @@ hermes skills tap add arm2arm/AstroAgentAssistant
 
 Then search and install skills from it.
 
-### Install examples
-
-Browse/search:
+### Browse and search
 
 ```bash
 hermes skills browse
 hermes skills search shboost
 hermes skills search reana
+hermes skills search gaia
+hermes skills search manim
 ```
 
-Install specific skills:
+### Install specific skills
 
 ```bash
-hermes skills install arm2arm/AstroAgentAssistant/astronomy/shboost24-cmd
-hermes skills install arm2arm/AstroAgentAssistant/astronomy/gaia-aip-de-adql
-hermes skills install arm2arm/AstroAgentAssistant/workflows/reana-aip
-hermes skills install arm2arm/AstroAgentAssistant/infrastructure/openwebui-hermes
-```
+# Astronomy
+hermes skills install arm2arm/AstroAgentAssistant/astronomy/rave-dr6-public-talk-visualizations
+hermes skills install arm2arm/AstroAgentAssistant/gaia-dr3-tap-query
 
-Suggested starter bundle for the current AIP-style setup:
+# Data science
+hermes skills install arm2arm/AstroAgentAssistant/data-science/shboost-cmd-plot
+hermes skills install arm2arm/AstroAgentAssistant/data-science/dask-hvplot-datashader-scientific-plots
 
-```bash
-hermes skills install arm2arm/AstroAgentAssistant/astronomy/data-aip-de-s3
-hermes skills install arm2arm/AstroAgentAssistant/astronomy/shboost24-cmd
-hermes skills install arm2arm/AstroAgentAssistant/workflows/reana-aip
-hermes skills install arm2arm/AstroAgentAssistant/infrastructure/hermes-api-server
+# REANA workflows
+hermes skills install arm2arm/AstroAgentAssistant/reana-workflows/reana-serial-python-analysis-template
+
+# MLOps / LLM
+hermes skills install arm2arm/AstroAgentAssistant/mlops/unsloth
+hermes skills install arm2arm/AstroAgentAssistant/mlops/gguf-quantization
+
+# DevOps
+hermes skills install arm2arm/AstroAgentAssistant/devops/paperclip-oss120b-external
+hermes skills install arm2arm/AstroAgentAssistant/devops/dtwin-epics-runbook
+
+# Productivity
+hermes skills install arm2arm/AstroAgentAssistant/productivity/nextcloud-caldav-calendar-management
+hermes skills install arm2arm/AstroAgentAssistant/productivity/linear
+
+# Software development
+hermes skills install arm2arm/AstroAgentAssistant/software-development/subagent-driven-development
+hermes skills install arm2arm/AstroAgentAssistant/software-development/systematic-debugging
+
+# Infrastructure
+hermes skills install arm2arm/AstroAgentAssistant/infrastructure/docs-mcp-at-aip
 ```
 
 ### Load a skill in a session
 
 ```bash
-hermes -s shboost24-cmd
-hermes -s reana-aip -s data-aip-de-s3
+hermes -s shboost-cmd-plot
+hermes -s reana-serial-python-analysis-template -s docs-mcp-at-aip
 ```
 
-Or ask Hermes directly in chat to use a named skill.
+Or simply ask Hermes in chat to use a named skill — it will auto-load the relevant one.
 
 ## Security scanning
 
@@ -76,7 +118,7 @@ It runs `gitleaks` on:
 - pull requests
 - manual workflow dispatch
 
-This helps catch accidentally committed API keys, tokens, passwords, and private keys in both the working tree and git history available to the runner.
+This helps catch accidentally committed API keys, tokens, passwords, and private keys.
 
 ## Authoring rules
 
@@ -93,67 +135,42 @@ Optional support files:
 - `scripts/`
 - `assets/`
 
-## Initial starter skills
+## Categories overview
 
-### Astronomy
-- **rave-dr6** — Canonical RAVE DR6 TAP query and table/column discovery skill
-- **rave-dr6-nearest-100-plot** — Nearest-100 RAVE DR6 PNG plotting workflow
-- **rave-dr6-public-talk-visualizations** — Presentation-ready RAVE DR6 visual outputs for talks
-- **gaia-aip-de-adql** — Gaia DR3 @AIP Daiquiri REST API (1.8B sources, async jobs)
-- **shboost24-cmd** — SHboost24 CMD plotting with local Parquet caching
-- **starhorse-access** — StarHorse distance estimation
-- **data-aip-de-s3** — AIP S3 bucket access and dataset listing
+**Astronomy (3)** — RAVE DR6 animations and plots, Gaia DR3 queries
 
-### Workflows
-- **reana-aip** — REANA workflows with AIP conventions (approved envs, 32GB memory)
-- **reana-client-config** — REANA client multi-profile config and secret handling via `config.yaml`
-- **reana-shboost24** — REANA workflows for SHboost24 CMD analysis
-- **reana-serial-python** — REANA serial Python analysis template
+**Autonomous AI Agents (4)** — Claude Code, Codex, OpenCode, Hermes agent orchestration
 
-### Python
-- **cmd-plotting** — Colour-magnitude diagram plotting conventions
-- **s3-parquet-sampling** — S3 Parquet sampling, local caching, and PNG plotting
-- **seaborn-paper-plots** — Publication-quality seaborn figures
-- **python-mcp-docs-first** — Consult the docs MCP server first when writing Python, especially for Dask and other indexed libraries
-- **dask-mcp-docs-first** — Use strict MCP-grounded query templates before generating or reviewing Dask code
-- **pandas-datashader-mcp-docs-first** — Use MCP-grounded pandas and Datashader query templates before building plotting pipelines
-- **hdf5-on-s3-cached** — Cache S3-hosted HDF5 locally first and convert reusable tabular subsets to Parquet
-- **dask-hvplot-datashader-scientific-plots** — Build scalable scientific plots with Dask, hvPlot, and Datashader
+**Creative (13)** — Manim animations, ASCII art, architecture diagrams, Excalidraw, p5.js, web design, music
 
-### Infrastructure
-- **openwebui-hermes** — Hermes ↔ Open WebUI integration
-- **hermes-api-server** — Hermes API server setup
-- **docs-mcp-at-aip** — AIP documentation MCP server (15+ indexed libraries: reana, pandas, snakemake, dask, unsloth, etc.)
-- **hermes-native-mcp** — Configure Hermes built-in MCP client for HTTP/stdio servers, testing, and TLS trust fixes
-- **mcporter-cli** — Use mcporter for ad-hoc MCP discovery, schema inspection, and debugging
+**Data Science (24)** — Scientific plotting (Dask/hvPlot/Datashader), S3 Parquet, REANA workflows, RAVE/Gaia/SHBoost
 
-### Science / Digital Twin
-- **dtwin-setup** — Apptainer-based dt4acc digital twin setup for BESSY II-style workflows
-- **dtwin-host-smoke-test** — Reproducible host-side smoke test for the public dt4acc stack
-- **dtwin-epics-runbook** — EPICS-first runbook for the fastest current dt4acc startup path
-- **dtwin-tango-runbook** — SOLEIL-oriented TANGO runbook with private-data prerequisites
-- **dt4acc-container-troubleshooting** — Troubleshooting guide for dt4acc container and TANGO startup issues
+**DevOps (14)** — Docker, dt4acc digital twin, Manim rendering, Paperclip setup, REANA scripts, webhooks
 
-### Research
-- **arxiv-research** — arXiv paper search, retrieval, BibTeX, and Semantic Scholar citations
-- **mnras-latex-portable** — MNRAS LaTeX manuscript build and packaging
-- **2026-agentic-astronomy-literature** — Curated literature on AI agents in astronomy
+**Email (1)** — Himlaya CLI for IMAP/SMTP
 
-### Productivity & GitHub
-- **nextcloud-caldav** — AIP Nextcloud calendar management via CalDAV
-- **github-pr-workflow** — Full PR lifecycle (create, review, merge)
-- **skills-repo-maintenance** — Audit, sync, and maintain the public skills repository itself
+**Gaming (2)** — Minecraft modpack servers, Pokemon EMU
 
-## AIP-specific operational defaults currently encoded in this repo
+**GitHub (8)** — PR lifecycle, issues, code review, repo management, skill maintenance, auth
 
-- SHboost24 public S3 endpoint: `https://s3.data.aip.de:9000`
-- SHboost24 parquet glob: `s3://shboost2024/shboost_08july2024_pub.parq/*.parquet`
+**MLOps (22)** — Fine-tuning (Axolotl, TRL, Unsloth, PEFT), serving (vLLM, llama-cpp), HuggingFace, evaluation, quantization, MaaS
+
+**Productivity (10)** — CalDAV, Linear, Notion, Google Workspace, OCR, PDFs, presentations, image descriptions
+
+**Research (9)** — arXiv, blog monitoring, LaTeX/MNRAS, literature review, polymarket, LLM wiki
+
+**Software Development (11)** — MCP docs-first, TDD, subagent-driven dev, debugging, code review, planning
+
+## AIP-specific operational defaults
+
+- SHBoost public S3 endpoint: `https://s3.data.aip.de:9000`
+- SHBoost parquet glob: `s3://shboost2024/shboost_08july2024_pub.parq/*.parquet`
 - REANA environment source repo: `https://gitlab-p4n.aip.de/punch_public/reana/environments`
 - Common observed REANA environments:
   - `gitlab-p4n.aip.de:5005/p4nreana/reana-env:py311-astro.9845`
   - `gitlab-p4n.aip.de:5005/p4nreana/reana-env:py311-astro-ml.2891a60c`
 - REANA convention: default memory `32GB`
-- Plotting convention for SHboost24 CMDs:
+- Plotting convention for SHBoost CMDs:
   - local Parquet cache
   - PNG only
   - original axes
