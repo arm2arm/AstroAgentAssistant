@@ -1,3 +1,14 @@
+---
+name: drp-paper
+description: Create and maintain the DRP white paper project with REANA integration
+version: 1.0.0
+license: MIT
+created: 2025-04-11
+tags: [research, paper, drp, reana]
+hermes:
+  domain: research
+---
+
 # DRP Paper: Digital Research Products Framework
 
 Create and maintain the DRP white paper project covering the framework for reproducible science on DRP-Hub with full REANA integration.
