@@ -1,0 +1,12 @@
+{
+  "goal": "Implement small fix or run tests for specified failing test",
+  "context": "PUT THE FAILING TEST TRACE AND SPEC HERE",
+  "workdir": "/absolute/path/to/repo",
+  "toolsets": ["terminal", "file"],
+  "max_attempts": 3,
+  "test_command": "pytest -q --maxfail=10 --showlocals",
+  "artifacts": {
+    "pytest_output": "/tmp/pi-<repo>-pytest-<ts>.txt",
+    "branch_name": "pi/auto-fix-<ts>"
+  }
+}

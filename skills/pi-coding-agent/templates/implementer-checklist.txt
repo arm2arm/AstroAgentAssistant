@@ -1,0 +1,7 @@
+1. Create a failing test or use the existing failing test ID.
+2. Run: pytest <test-id> -q --showlocals and capture output.
+3. Implement minimal change in the target file(s).
+4. Run the test again to ensure it passes.
+5. Run the module tests or a small subset to ensure no regression.
+6. Commit changes on a new branch: git checkout -b pi/auto-fix-<ts>; git add -A; git commit -m "fix: <short description>"
+7. Save artifacts: pytest output file, commit SHA, git diff --name-only
