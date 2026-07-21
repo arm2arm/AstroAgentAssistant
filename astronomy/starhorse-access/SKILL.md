@@ -1,8 +1,9 @@
 ---
 name: starhorse-access
 description: Access StarHorse data products including SHboost-2024 and the SH21 EDR3 catalog via gaia.aip.de TAP.
-version: 2.0.1
-author: Hermes / AIP
+version: 2.0.2
+author: Tom Tong (AIP, accountable curator; content agent-generated within Project Hermes, human-curated)
+orcid: 0000-0001-6014-5031
 license: MIT
 metadata:
   hermes:
@@ -18,6 +19,14 @@ Use this skill for ANY StarHorse-related data work. Two products:
 
 1. **SHboost-2024** — XGBoost-approximated posteriors, public Parquet on S3
 2. **SH21 EDR3** — Full Bayesian StarHorse posteriors for Gaia EDR3, via gaia.aip.de TAP
+
+## Data Papers & Acknowledgment
+Cite the source papers in any work using these products:
+- **SH21 EDR3** — Anders, Khalatyan, Queiroz et al. 2022, *A&A* **658**, A91.
+- **SHboost-2024** — Khalatyan, Anders, Chiappini et al. 2024, *A&A* **691**, A98.
+
+These are access instructions only; the catalogs remain the authors' work under their
+own terms. Follow the gaia.aip.de data-acknowledgment policy when publishing.
 
 ## Quick Decision
 - **Nearby stars (< 20 pc), quick CMD** → SHboost-2024 (fast, local parquet)
@@ -129,3 +138,5 @@ ax.set_ylabel(r'$M_G$')
 - Full schemas re-validated 2026-07-20 against TAP_SCHEMA + the SHboost Parquet
   footer → `references/schema.md` (SHboost column list corrected: `xgb_*` naming,
   no `*50` columns).
+- Data-paper citations + accountable curator/ORCID added 2026-07-21 (Skill Commons
+  first-package publication prep).
