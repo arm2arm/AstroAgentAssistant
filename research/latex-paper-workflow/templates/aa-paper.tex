@@ -1,0 +1,80 @@
+% The Astronomy & Astrophysics manuscript template
+% See http://aa.apac.mpg.de/en/aa-for-authors/aa-template-package/
+
+\documentclass{aa}
+
+% ── Packages ─────────────────────────────────────────────────────────
+\usepackage[T1]{fontenc}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{gensymb}
+\usepackage{footnote}
+\makesavenoteenv{tabular}
+
+% ── Metadata ─────────────────────────────────────────────────────────
+\title{Paper title here}
+
+\author{A. Author\inst{1}
+        \and B. Author\inst{2,3}
+        \and C. Author\inst{1}
+       }
+
+\mail{corresponding@email.address} % <-- use \mail{}, NOT \thanks{} in \author{}
+
+\institute{Institution Name, Address, City, Postal Code, Country
+          \and
+          Another Institution, Address, City, Postal Code, Country
+         }
+
+\date{}
+
+% ── ABSTRACT (MANDATORY 5-PART FORMAT) ──────────────────────────────
+% A&A requires exactly this format in the preamble, NOT an environment.
+% \abstract{Context}{Aims}{Methods}{Results}{Conclusions}
+\abstract{
+  Context. [1-2 sentences on background and problem]
+}{
+  Aims. [1 sentence stating the objective]
+}{
+  Methods. [1 sentence on the approach]
+}{
+  Results. [1-2 sentences on key findings with numbers]
+}{
+  Conclusions. [1 sentence on implications]
+}
+
+\keywords{keyword1 --
+          keyword2 --
+          keyword3}
+
+\begin{document}
+
+\maketitle
+
+\input{chapters/introduction}
+
+\input{chapters/data_pipeline}
+
+\input{chapters/results}
+
+\input{chapters/discussion}
+
+\input{chapters/conclusion}
+
+\appendix
+
+\input{chapters/appendix}
+
+% ── References (TRADITIONAL BIBLATEX — no biblatex package) ─────────
+\begin{thebibliography}{}
+
+\bibitem[Author et al.(Year)]{key}
+Author, A., Coauthor, B. \& Third, C. Year, Journal, Volume, Page
+
+\end{thebibliography}
+
+\end{document}

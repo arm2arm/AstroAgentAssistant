@@ -1,0 +1,61 @@
+% ===================================================================
+% EPJ Web of Conferences — submission-ready wrapper
+% Official template: https://www.epj-conferences.org/for-authors
+% Package version: 2025-03-28 (official webofc.cls)
+% ===================================================================
+\documentclass{webofc}
+% Two-column option (uncomment if required by organizers):
+% \documentclass[twocolumn]{webofc}
+
+% --- MANDATORY by EPJ webofc ---
+\usepackage[varg]{txfonts}   % Web of Conferences font — DO NOT remove
+
+% --- Additional packages ---
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,citecolor=blue,urlcolor=blue,linkcolor=blue}
+
+% ===================================================================
+\title{Your Paper Title Here}
+
+\author{%
+  \firstname{First} \lastname{Author}\inst{1}\fnsep
+    \thanks{\email{first.author@institution.org}}
+  \and
+  \firstname{Second} \lastname{Author}\inst{2}
+  \and
+  \firstname{Third} \lastname{Author}\inst{1}
+}
+
+\institute{%
+  Full Name of Institution 1, Street Address, City, Country
+  \and
+  Full Name of Institution 2, Street Address, City, Country
+}
+
+\abstract{%
+  Insert your English abstract here. It should not normally exceed 200 words.
+  Describe the problem, method, key results, and conclusion.
+}
+
+% ===================================================================
+\begin{document}
+\maketitle
+
+\section{Introduction}
+
+% Option A: inline content here
+Your text comes here.
+
+% Option B: include body from a separate file (keeps wrapper clean)
+% \input{main-body-epj.tex}
+
+% --- Bibliography (woc.bst style loaded automatically by webofc.cls) ---
+\bibliography{references}
+
+\end{document}

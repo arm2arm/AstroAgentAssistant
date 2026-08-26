@@ -37,6 +37,7 @@ BLURBS = {  # curated per-directory descriptions; keep in sync with new categori
     "infrastructure": "AIP-developed Hermes/OpenWebUI/API-server/MCP infrastructure, workspace backup, and integration workflows",
     "leisure": "AIP-developed nearby places and leisure search workflows",
     "media": "AIP-developed audio/video generation and media post-processing workflows",
+    "mlops": "AIP-developed local LLM serving, quantization, and inference workflows (vLLM, Ollama, GGUF)",
     "productivity": "AIP-developed calendars, contacts, image-description, and document workflows",
     "python": "AIP-developed Python data engineering, caching, plotting, symbolic math, and reusable scientific-programming workflows",
     "reana-workflows": "AIP-developed REANA operations, client configuration, templates, execution recipes, monitoring, and workflow best practices",

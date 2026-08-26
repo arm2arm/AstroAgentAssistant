@@ -1,0 +1,131 @@
+\documentclass[11pt, a4paper, oneside]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{setspace}
+
+\geometry{margin=2cm}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Exposé}
+\cfoot{\thepage}
+\setlength{\headheight}{15pt}
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5ex}
+\setlength{\intextsep}{0.5em}
+
+\begin{document}
+\pagestyle{empty}
+
+\vspace*{-2cm}
+\begin{center}
+{\huge\textbf{Exposé}}\\[2mm]
+{Masterarbeit / Bachelorarbeit}\\\\[4mm]
+\textbf{\Large Title Here}
+
+\vspace{4mm}
+\begin{tabular}{@{}p{0.55\textwidth}p{0.35\textwidth}@{}}
+\textbf{Student:} Name & \textbf{Supervisor:} \\
+University & Prof.\ Name \\
+& Department, University \\
+& \\
+\today & \\
+\end{tabular}
+\end{center}
+
+\newpage
+
+\section{Forschungsfrage und Motivation}
+
+\subsection{Hintergrund und Problemstellung}
+Replace with your problem description. This section should establish:
+\begin{itemize}
+    \item The broader context (what field/domain?)
+    \item The specific problem (what goes wrong today?)
+    \item Why it matters (consequences of not solving it?)
+\end{itemize}
+
+\subsection{Forschungsfrage}
+\begin{quote}
+\textit{Your research question here.}
+\end{quote}
+
+\subsection{Ziele}
+\begin{itemize}
+    \item \textbf{Primär:} Main quantitative goal.
+    \item \textbf{Sekundär:} Model comparison or methodological goal.
+    \item \textbf{Tertiär:} Analysis or diagnostic goal.
+\end{itemize}
+
+\section{Stand der Forschung}
+
+\subsection{Subsection 1}
+Review of relevant work in this area.
+
+\subsection{Subsection 2}
+Gap analysis -- what existing approaches miss.
+
+\subsection{Subsection 3}
+How your approach differs and why that matters.
+
+\section{Methodik}
+
+\subsection{Workload/Experimental Model}
+Describe your data, simulation, or experimental setup.
+
+\subsection{ML-Modelle (or Methods)}
+List your methods/models with key hyperparameters.
+
+\subsection{Simulationsaufbau und Bewertung}
+Describe the comparison setup and evaluation metrics.
+
+\section{Erwartete Ergebnisse, Abgrenzung und Planung}
+
+\subsection{Erwartete Ergebnisse}
+List your expected findings with quantitative targets.
+
+\subsection{Abgrenzung}
+What is excluded from the scope.
+
+\subsection{Arbeitsplanung}
+\begin{table}[h!]
+\centering\small
+\begin{tabular}{@{}llc@{}}
+\toprule
+\textbf{Phase} & \textbf{Beschreibung} & \textbf{Dauer} \\
+\midrule
+1. Literaturstudium & Overview & X Wchn. \\
+2. Methodik & Implementation & X Wchn. \\
+3. Modellentwicklung & Training and validation & X Wchn. \\
+4. Auswertung & Analysis & X Wchn. \\
+5. Schriftfassung & Writing & X Wchn. \\
+6. Abschluss & Review and defense & X Wchn. \\
+\midrule
+& \textbf{Gesamtdauer} & \textbf{ca.\ XX Wchn.} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Risikoabschätzung}
+\begin{itemize}
+    \item \textbf{Gering:} Low-risk items.
+    \item \textbf{Mittel:} Medium-risk items + mitigation.
+\end{itemize}
+
+\newpage
+\bibliographystyle{ieeetr}
+\begin{thebibliography}{9}
+
+\bibitem{placeholder}
+Author, A. (Year).
+\textit{Title}.
+Journal/Conference.
+
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,132 @@
+# Working AgentBench Assignment Config Template
+
+This is a corrected config that works with the current AgentBench API.
+
+## Minimal Working Config
+
+```yaml
+# configs/assignments/minimal_test.yaml
+
+definition:
+  import: /tmp/AgentBench/configs/tasks/task_assembly.yaml
+  agent:
+    import: /tmp/AgentBench/configs/agents/api_agents.yaml
+    parameters:
+      module: src.client.agents.http_agent.HTTPAgent
+      parameters:
+        url: http://localhost:11434/api/chat
+        body:
+          model: qwen3.6:latest
+          stream: false
+          max_tokens: 1024
+        prompter:
+          name: role_content_dict
+          args:
+            message_key: messages
+            role_key: role
+            content_key: content
+            user_role: user
+            agent_role: assistant
+
+assignments:
+  - agent:
+      - ollama-agent
+    task:
+      - os-std
+
+concurrency:
+  task:
+    os-std: 2
+  agent:
+    ollama-agent: 2
+
+output: /tmp/agentbench_results_{TIMESTAMP}
+```
+
+## Key Fixes
+
+1. **Absolute import paths**: Use full paths like `/tmp/AgentBench/configs/...` instead of relative paths.
+
+2. **Agent module**: Must specify `module: src.client.agents.http_agent.HTTPAgent`.
+
+3. **Assignments format**: Must be a list of objects with `agent` and `task` arrays.
+
+4. **Concurrency**: Separate `task` and `agent` concurrency settings.
+
+## Alternative: Direct Runner (Recommended)
+
+The built-in assigner is complex and error-prone. Use the `references/agentbench_runner.py` script instead:
+
+```bash
+python references/agentbench_runner.py os-std 5
+```
+
+This bypasses the config system entirely and works directly with the API.
+
+## Testing
+
+Before running a full benchmark:
+
+```bash
+# 1. Verify controller is running
+curl http://localhost:5020/api/list_workers | jq
+
+# 2. Test single sample manually
+python references/agentbench_runner.py os-std 1
+
+# 3. Check results
+cat /tmp/agentbench_results_*.json | jq '.results[0]'
+```
+
+## Common Config Errors
+
+| Error | Cause | Fix |
+|-------|-------|-----|
+| `File not found` | Relative import path | Use absolute paths |
+| `'assignments' must be a list` | Wrong format | Use list of objects |
+| `field required: module` | Missing agent module | Add `module: src.client.agents.http_agent.HTTPAgent` |
+| `value is not a valid dict` | Wrong concurrency format | Use nested `task` and `agent` keys |
+
+## Full Example with Multiple Tasks
+
+```yaml
+definition:
+  import: /tmp/AgentBench/configs/tasks/task_assembly.yaml
+  agent:
+    import: /tmp/AgentBench/configs/agents/api_agents.yaml
+    parameters:
+      module: src.client.agents.http_agent.HTTPAgent
+      parameters:
+        url: http://localhost:11434/api/chat
+        body:
+          model: qwen3.6:latest
+          stream: false
+        prompter:
+          name: role_content_dict
+          args:
+            message_key: messages
+            role_key: role
+            content_key: content
+
+assignments:
+  - agent:
+      - ollama-agent
+    task:
+      - dbbench-std
+      - os-std
+
+concurrency:
+  task:
+    dbbench-std: 2
+    os-std: 2
+  agent:
+    ollama-agent: 4
+
+output: /tmp/agentbench_multi_task_{TIMESTAMP}
+```
+
+## Notes
+
+- The `assigner` script is still experimental and may have API mismatches.
+- For production use, prefer the direct runner script.
+- Always test with 1-2 samples before running full benchmark.

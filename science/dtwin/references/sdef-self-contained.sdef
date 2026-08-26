@@ -1,0 +1,49 @@
+Bootstrap: docker
+From: python:3.11-slim
+
+%files
+    dt4acc /build/dt4acc
+    bact-twin-architecture /build/bact-twin-architecture
+    dt4acc-lib /build/dt4acc-lib
+    lat2db /build/lat2db
+
+%post
+    apt-get update && apt-get install -y --no-install-recommends \
+        gcc g++ git procps lsof \
+        && rm -rf /var/lib/apt/lists/*
+
+    mkdir -p /twin/python/venv
+    python3 -m venv /twin/python/venv
+    . /twin/python/venv/bin/activate
+    pip install --upgrade pip
+
+    # Install PyPI deps needed by dt4acc
+    pip install softioc>=4.1 p4p
+
+    # Install local packages
+    pip install -v /build/lat2db/ /build/bact-twin-architecture/ /build/dt4acc-lib/
+    pip install -v /build/dt4acc/
+
+    # Fix broken uuid.py in p4p/softioc packages (Python 2 syntax)
+    find /twin/python/venv/lib/python3.11/site-packages -name 'uuid.py' -exec cp /usr/lib/python3.11/uuid.py {} \; 2>/dev/null || true
+
+    # Create startup wrapper that bypasses interactive console
+    cat > /start_ioc.sh << 'SCRIPT'
+        #!/bin/bash
+        export PYTHONUNBUFFERED=1
+        export MONGODB_URL=${MONGODB_URL:-mongodb://localhost:27017/bessyii}
+        exec /twin/python/venv/bin/python3 /build/dt4acc/scripts/bessyii/dt4acc_softioc.py </dev/null
+    SCRIPT
+    chmod +x /start_ioc.sh
+
+    mkdir -p /etc/ld.so.conf.d
+    echo "/twin/lib" > /etc/ld.so.conf.d/twin.conf
+    ldconfig
+
+%environment
+    export PATH="/twin/python/venv/bin:$PATH"
+    export LD_LIBRARY_PATH="/twin/lib:$LD_LIBRARY_PATH"
+    export PYTHONUNBUFFERED=1
+
+%startscript
+    exec /start_ioc.sh
