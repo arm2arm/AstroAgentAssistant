@@ -12,7 +12,7 @@ Total: **114** custom skills across **15** categories, plus **14** superseded sk
 |---|---|---|
 | `agents/` | AstroAgent concepts and configuration | 1 |
 | `astronomy/` | AIP-developed survey archives, TAP/ADQL and REST queries, stellar catalogs, and astronomy-specific plots/animations. See [`astronomy/README.md`](astronomy/README.md) for the grouped astronomy routing guide. | 17 |
-| `autonomous-ai-agents/` | AIP-developed skills | 1 |
+| `autonomous-ai-agents/` | AIP-developed skills | 2 |
 | `creative/` | AIP-developed educational animations, Manim, visual explainers, and media workflows | 14 |
 | `data-science/` | AIP-developed scientific visualization and dense-data plotting workflows | 1 |
 | `devops/` | AIP-developed operations, containers, deployment, service exposure, and runtime troubleshooting | 10 |
@@ -81,6 +81,7 @@ Total: **114** custom skills across **15** categories, plus **14** superseded sk
 | `astronomy/rave-dr6/` | Query the RAVE DR6 catalog at https://www.rave-survey.org/tap/ using pyvo (TAPService.run_sync). Access stellar parameters, Gaia cross-matches, distances, and Galactic coordinates (l, b). Includes galactic a... |
 | `astronomy/starhorse-access/` | Access StarHorse data products including SHboost-2024 and the SH21 EDR3 catalog via gaia.aip.de TAP. |
 | `astronomy/tap-pyvo-adql-access/` | Use when querying astronomy TAP services with ADQL through pyvo or curl, including service probes, metadata discovery, TOP-based queries, VOTable/FITS conversion, pandas/Parquet caching, and robust network f... |
+| `autonomous-ai-agents/deepseek-harness-dsh/` | Use when running coding tasks via dsh (DeepSeek Harness). Covers install, headless profiles, custom OpenAI-compatible provider config (verified vLLM recipe), one-shot and orchestrated multi-stage runs, context-window limits, and smoke testing. |
 | `autonomous-ai-agents/kanban-codex-lane/` | Use when a Hermes Kanban worker wants to run Codex CLI as an isolated implementation lane while Hermes keeps ownership of task lifecycle, reconciliation, testing, and handoff. |
 | `creative/4most-spectrograph-animation/` | Manim CE animation explaining the 4MOST spectrograph for 11th-grade physics class. Full optical path from starlight through telescope, collimator, slit, dispersion element, fibre positioner, spectrographs, t... |
 | `creative/animate-sine-cosine-matplotlib/` | Generate an MP4 animation of sine (green) and cosine (red) curves using matplotlib for frame rendering and ffmpeg for encoding. The skill avoids privileged operations and destructive commands. |
