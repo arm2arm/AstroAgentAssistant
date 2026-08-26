@@ -17,18 +17,20 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from statistics import mean, stdev
 
 # === CONFIGURATION ===
+# Credentials are read from environment variables.
+# Set RUSTFS_KEY, RUSTFS_SECRET, VERSITYGW_KEY, VERSITYGW_SECRET before running.
 ENDPOINTS = {
     "rustfs (9000)": {
-        "url": "http://141.33.4.155:9000",
-        "key": "rustfsadmin2026",
-        "secret": "rustfsadmin2026",
-        "bucket": "dbbench-benchmarks",
+        "url": os.getenv("RUSTFS_URL", "http://141.33.4.155:9000"),
+        "key": os.getenv("RUSTFS_KEY"),
+        "secret": os.getenv("RUSTFS_SECRET"),
+        "bucket": os.getenv("RUSTFS_BUCKET", "dbbench-benchmarks"),
     },
     "versitygw (7070)": {
-        "url": "http://141.33.4.155:7070",
-        "key": "versitygwadmin2026",
-        "secret": "versitygwadmin2026",
-        "bucket": "dbbench-benchmarks",
+        "url": os.getenv("VERSITYGW_URL", "http://141.33.4.155:7070"),
+        "key": os.getenv("VERSITYGW_KEY"),
+        "secret": os.getenv("VERSITYGW_SECRET"),
+        "bucket": os.getenv("VERSITYGW_BUCKET", "dbbench-benchmarks"),
     },
 }
 
