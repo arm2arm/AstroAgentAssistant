@@ -2,7 +2,7 @@
 
 Custom Hermes Agent skills developed by the AIP AstroAgent team. This repository intentionally keeps only project-specific/AIP-developed skills; stock Hermes skills and third-party vendor skills are excluded.
 
-Total: **176** custom skills across **16** categories, plus **14** superseded skills retained in [`outdated-skills/`](outdated-skills/README.md).
+Total: **175** custom skills across **16** categories, plus **14** superseded skills retained in [`outdated-skills/`](outdated-skills/README.md).
 
 > The inventory below is generated — run `python3 scripts/gen_readme.py` after changing skills instead of editing this file by hand.
 
@@ -22,7 +22,7 @@ Total: **176** custom skills across **16** categories, plus **14** superseded sk
 | `mlops/` | AIP-developed local LLM serving, quantization, and inference workflows (vLLM, Ollama, GGUF) | 2 |
 | `productivity/` | AIP-developed calendars, contacts, image-description, and document workflows | 5 |
 | `python/` | AIP-developed Python data engineering, caching, plotting, symbolic math, and reusable scientific-programming workflows | 7 |
-| `reana-workflows/` | AIP-developed REANA operations, client configuration, templates, execution recipes, monitoring, and workflow best practices | 22 |
+| `reana-workflows/` | AIP-developed REANA operations, client configuration, templates, execution recipes, monitoring, and workflow best practices | 21 |
 | `research/` | AIP-developed academic research, literature, arXiv access, LaTeX manuscripts, DRP, Bayesian imaging (J-UBIK/NIFTy), and paper improvement workflows | 34 |
 | `science/` | AIP-developed dt4acc digital twin, accelerator-science runbooks, EPICS/Tango, and host smoke tests | 7 |
 | `software-development/` | AIP-developed coding workflows, docs-first development, and application-specific implementation guides | 6 |
@@ -54,7 +54,7 @@ Total: **176** custom skills across **16** categories, plus **14** superseded sk
 
 **Python (7)** — AIP-developed Python data engineering, caching, plotting, symbolic math, and reusable scientific-programming workflows
 
-**Reana Workflows (22)** — AIP-developed REANA operations, client configuration, templates, execution recipes, monitoring, and workflow best practices
+**Reana Workflows (21)** — AIP-developed REANA operations, client configuration, templates, execution recipes, monitoring, and workflow best practices
 
 **Research (34)** — AIP-developed academic research, literature, arXiv access, LaTeX manuscripts, DRP, Bayesian imaging (J-UBIK/NIFTy), and paper improvement workflows
 
@@ -194,7 +194,6 @@ Total: **176** custom skills across **16** categories, plus **14** superseded sk
 | `reana-workflows/reana-workflow-sin-plot/` | Automates creation, submission, monitoring, and retrieval of a REANA workflow that plots a green sine curve using pandas and matplotlib. |
 | `reana-workflows/reana-workflow-with-env/` | Create a REANA workflow respecting the organization’s environment repository and default memory limit. |
 | `reana-workflows/reana/` | Complete guide to the REANA reproducible analytics platform: Dockerized client setup, multi-backend profiles, workflow authoring patterns, S3 dataset workflows, and best practices. Covers dev/prod backends,... |
-| `reana-workflows/reana/drp-hub/` | Digital Research Product Hub — federated infrastructure for reproducible science in particle physics & astrophysics. PUNCH4NFDI consortium project. |
 | `research/2026-agentic-astronomy-literature/` | Summarize and apply the key 2026 literature on agentic systems in astronomy and scientific analysis. |
 | `research/agentbench-benchmarking/` | Complete guide to running AgentBench FC benchmarks with LLM agents |
 | `research/agentbench-dbbench-benchmark/` | Run AgentBench DBBench benchmark against LLMs and generate standardized comparison dashboard. Use when testing any model on DBBench (SQL generation task). |
